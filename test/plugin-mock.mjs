@@ -10,8 +10,8 @@ import { apply } from '../index.js'
 const logs = []
 const sections = []
 const injected = []
-let tool = null
-let command = null
+const tools = new Map()
+const commands = new Map()
 let route = null
 const handlers = new Map()
 
@@ -49,8 +49,8 @@ const ctx = {
     if (name === 'connection') return { requestRejection: () => undefined }
     return undefined
   },
-  tools: { register: (definition) => { tool = definition; return () => {} } },
-  commands: { register: (definition) => { command = definition; return () => {} } },
+  tools: { register: (definition) => { tools.set(definition.name, definition); return () => {} } },
+  commands: { register: (definition) => { commands.set(definition.name, definition); return () => {} } },
   webServer: { register: (definition) => { route = definition; return () => {} } },
 }
 
@@ -58,9 +58,12 @@ apply(ctx, {})
 console.log('apply() ok — logs:', logs.filter(([l]) => l === 'info').length, 'info line(s)')
 
 // --- tool -----------------------------------------------------------------
+const tool = tools.get('codex_history')
 assert.ok(tool, 'tool registered')
 assert.equal(tool.name, 'codex_history')
 assert.equal(tool.parameters.required[0], 'action')
+assert.ok(tools.get('dsh_history'), 'dsh_history tool registered')
+console.log('tools →', [...tools.keys()].join(', '))
 
 const listed = await tool.execute({ action: 'list' }, {})
 assert.equal(listed.action, 'list')
@@ -85,8 +88,11 @@ const missing = await tool.execute({ action: 'read', session_id: 'nope' }, {})
 assert.ok(missing.error, 'unknown id reports an error')
 
 // --- command --------------------------------------------------------------
+const command = commands.get('codex')
 assert.ok(command, 'command registered')
 assert.equal(command.name, 'codex')
+assert.ok(commands.get('dsh'), 'dsh command registered')
+console.log('commands →', [...commands.keys()].join(', '))
 
 const listResult = await command.handler({ rawInput: 'list', agent })
 assert.equal(listResult.kind, 'success')

@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - 修复请求 URL 拼接时丢失 query string 的问题。
+- 客户端脚本被重复执行时不再抛出「duplicate factory registration」：重复执行会被安全跳过，
+  热重载或残留的启动图行都不会影响面板。
 
 ## [1.2.0] - 2026-10-23
 
