@@ -71,16 +71,27 @@ bottom-bar entries (`activity`, `usage`). Clicking it opens a panel with:
 
 ### 4.1 Plugin manager (recommended)
 
-1. Open DSH → **Plugin Manager** → add a plugin.
-2. Enter the GitHub URL:
+1. Open DSH → the **Plugins** page in the sidebar → add a plugin.
+2. Enter the install spec — any of these three works:
 
    ```
-   https://github.com/chameleonn4/dsh-codex-history
+   github:chameleonn4/dsh-codex-history
+   https://github.com/chameleonn4/dsh-codex-history.git
+   chameleonn4/dsh-codex-history
    ```
 
-   (or `chameleonn4/dsh-codex-history`)
-3. Confirm. The manager installs it as a bundle into the current profile and writes the patch row.
+3. Confirm. The manager checks the repository with `git ls-remote`, runs `pnpm add`,
+   installs the plugin as a bundle into the current profile and writes the patch row.
 4. **Restart DSH** — the “Codex 历史” pill appears under the composer.
+
+An agent can do the same from a session (needs `danger-full-access`):
+
+```
+plugin_manager action=install_bundle target=github:chameleonn4/dsh-codex-history
+```
+
+> For a Git spec, the `engines.dsh` check runs *after* the fetch; when it fails the profile
+> manifest is restored and an `incompatible-version` record is reported. This plugin needs DSH ≥ 0.2.0.
 
 ### 4.2 Clone and install from a local directory
 
@@ -88,6 +99,9 @@ bottom-bar entries (`activity`, `usage`). Clicking it opens a panel with:
 git clone https://github.com/chameleonn4/dsh-codex-history.git
 dsh plugin --profile <profile> install ./dsh-codex-history
 ```
+
+> A local-path spec is checked for version compatibility *before* pnpm runs, so nothing is
+> downloaded when the DSH version does not satisfy `engines.dsh`.
 
 ### 4.3 Manual profile patch
 
@@ -106,6 +120,21 @@ and restart DSH.
 
 Link the repo into the profile, then re-enable the `codex-history` plugin entry after each change:
 the Host half hot-reloads, the Client half needs a page refresh.
+
+### 4.5 Work-laptop deployment checklist
+
+| # | Step | Note |
+| --- | --- | --- |
+| 1 | Confirm DSH ≥ 0.2.0 | plugin page → about, or `dsh --version` |
+| 2 | Use Codex once on that machine | the plugin needs `~/.codex/sessions/**/rollout-*.jsonl` |
+| 3 | Plugins page → add `github:chameleonn4/dsh-codex-history` | or clone and install from the folder |
+| 4 | Restart DSH | the “Codex 历史” pill under the composer means it works |
+| 5 | (optional) edit `~/.dsh/profiles/<profile>/cordis.patch.yml` | see section 5; defaults are fine |
+| 6 | (optional) point both machines at one synced folder | see section 7 (`share.enabled: true`) |
+| 7 | Verify | the panel lists local Codex sessions, or `GET /api/codex-history/status` returns `sessionCount > 0` |
+
+> Nothing has to be migrated between machines: every machine keeps its own `~/.codex/sessions`,
+> and the plugin only reads. Use the shared folder (section 7) when both sides should see each other.
 
 ---
 
