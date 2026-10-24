@@ -7,8 +7,13 @@
 [![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.0-5843b8)](https://github.com/chameleonn4/dsh-codex-history)
 [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![node](https://img.shields.io/badge/node-%3E%3D20-3c8739)](https://nodejs.org)
+[![market](https://img.shields.io/badge/DSH%20Market-submitted-ff7b1f)](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)
 
 中文文档：[README.md](./README.md)
+
+> 📌 **Listing status**: submitted to [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin), the
+> curated list behind the DSH plugin market — PR [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052).
+> The only open check is the one-day repository age, which re-runs by itself and clears on its own.
 
 ---
 

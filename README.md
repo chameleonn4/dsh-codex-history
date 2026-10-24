@@ -7,8 +7,13 @@
 [![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.0-5843b8)](https://github.com/chameleonn4/dsh-codex-history)
 [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![node](https://img.shields.io/badge/node-%3E%3D20-3c8739)](https://nodejs.org)
+[![market](https://img.shields.io/badge/DSH%20%E5%B8%82%E5%9C%BA-%E5%B7%B2%E6%8F%90%E4%BA%A4-ff7b1f)](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)
 
 English README: [README.en.md](./README.en.md)
+
+> 📌 **上架状态**：已向 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)（DSH 插件市场的精选列表）提交收录 PR
+> [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)。仓库创建满 1 天后该检查会自动转绿并合入，
+> 之后就能在 [awesome-dsh-plugin.com](https://awesome-dsh-plugin.com) 和 dsh-market 里搜到本插件。
 
 ---
 
