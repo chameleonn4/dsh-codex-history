@@ -77,9 +77,50 @@ Web 端在**输入框下方**多出一枚与其他下栏完全同款的小胶囊
 
 ## 4. 安装
 
-### 4.1 方式一：插件管理器（推荐）
+只有三种装法，任选其一。
 
-1. 打开 DSH → **插件** 页面（侧边栏的插件管理页）→ 添加插件。
+### 4.1 方式一：AI 部署（推荐）
+
+**打开 DSH，直接跟它说一句话就行。** 把下面这句原样发给 DSH 里的 agent：
+
+```
+帮我安装 dsh-codex-history 插件，地址是 github:chameleonn4/dsh-codex-history
+```
+
+agent 会自己完成整套流程：
+
+1. 调用插件管理器的 `install_bundle`，先 `git ls-remote` 确认仓库可达；
+2. 执行 `pnpm add`，把插件作为 bundle 装进当前 profile，并自动写入 `cordis.patch.yml` 的插入行；
+3. 校验 `engines.dsh`（本插件要求 DSH ≥ 0.2.0），不满足会回滚并说明原因；
+4. 提示你重启 DSH。
+
+重启后输入框下方就出现「**Codex 历史**」。
+
+想连配置一起让 agent 写好，就把需求一起说，例如：
+
+```
+帮我安装 dsh-codex-history 插件（github:chameleonn4/dsh-codex-history），
+并把 sessionsDir 设成 C:\Users\me\.codex\sessions，
+同时打开跨机共享目录，目录用 D:\CodexShare。
+```
+
+> agent 的安装动作需要 `danger-full-access` 权限；在受限权限下它会提示你授权，或改用方式三手动安装。
+
+### 4.2 方式二：插件市场（dsh-market）
+
+1. 打开 **dsh-market** 插件市场；
+2. 搜索 `dsh-codex-history`（或「Codex 历史」「Codex」）；
+3. 点安装，按提示重启 DSH。
+
+市场里的插件列表来自精选列表 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)，
+本插件的收录 PR 是 [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)；
+合并后就会出现在市场里。国内网络下市场会自动切换到 npm 镜像。
+
+> 收录合并前，先用方式一或方式三装。
+
+### 4.3 方式三：插件管理器
+
+1. 打开 DSH → **插件** 页面（侧边栏的插件管理页）→ 添加插件；
 2. 填入安装地址，三种写法任选其一：
 
    ```
@@ -88,66 +129,22 @@ Web 端在**输入框下方**多出一枚与其他下栏完全同款的小胶囊
    chameleonn4/dsh-codex-history
    ```
 
-3. 确认安装。插件管理器会先用 `git ls-remote` 检查仓库可达性，再执行 `pnpm add`，
-   把插件作为 bundle 装进当前 profile，并自动写入 `cordis.patch.yml` 的插入行。
-4. 安装完成后**重启 DSH**（或按提示重启），输入框下方就会出现「Codex 历史」。
-
-也可以在会话里直接让 agent 装（需要 `danger-full-access` 权限）：
-
-```
-plugin_manager action=install_bundle target=github:chameleonn4/dsh-codex-history
-```
+3. 确认安装。插件管理器会执行 `git ls-remote` + `pnpm add`，把插件作为 bundle 装进当前 profile，
+   并自动写入 `cordis.patch.yml` 的插入行；
+4. **重启 DSH**，输入框下方就会出现「Codex 历史」。
 
 > 从 GitHub 安装时，版本兼容性（`engines.dsh`）在拉取之后校验；不满足时会回滚 profile 清单，
 > 并给出 `incompatible-version` 记录（本插件要求 DSH ≥ 0.2.0）。
 
-### 4.2 方式二：克隆到本地再按目录安装
-
-```bash
-git clone https://github.com/chameleonn4/dsh-codex-history.git
-```
-
-然后在插件管理器里选择本地目录 `dsh-codex-history`，或用 CLI：
-
-```bash
-dsh plugin --profile <profile> install ./dsh-codex-history
-```
-
-> 本地目录安装走的是「本地路径」通道，版本兼容性在 pnpm 运行**之前**就会被检查，
-> 不满足时什么都不会下载。
-
-### 4.3 方式三：手动写入 profile patch
-
-编辑 `~/.dsh/profiles/<profile>/cordis.patch.yml`（`<profile>` 默认是 `desktop`），追加：
-
-```yaml
-- insert:
-    - id: codex-history
-      name: 'dsh-codex-history'
-```
-
-再把仓库目录放进 profile 的 `node_modules`（例如在 profile 目录下 `pnpm add link:D:/path/to/dsh-codex-history`）后重启 DSH。
-
-### 4.4 从源码开发
-
-```bash
-git clone https://github.com/chameleonn4/dsh-codex-history.git
-cd dsh-codex-history
-```
-
-在 profile 目录下执行 `pnpm add link:D:/path/to/dsh-codex-history` 建立链接后，
-改完代码在插件管理器里重新启用一次 `codex-history`（或 `dsh plugin ... set_plugin include:codex-history enabled=true`），
-Host 侧代码会热重载；Client 侧刷新一次页面即可。
-
-### 4.5 工位笔记本部署清单
+### 4.4 工位笔记本部署清单
 
 在一台**新机器**上装好这套插件，只要按下面的顺序走一遍：
 
 | # | 步骤 | 说明 |
 | --- | --- | --- |
-| 1 | 确认 DSH 版本 ≥ 0.2.0 | 插件管理器 → 关于 / `dsh --version` |
+| 1 | 确认 DSH 版本 ≥ 0.2.0 | 插件页 → 关于 / `dsh --version` |
 | 2 | 在这台机器上正常使用 Codex 一次 | 需要 `~/.codex/sessions` 下有 `rollout-*.jsonl`，否则没有历史可读 |
-| 3 | 插件页 → 添加插件 → `github:chameleonn4/dsh-codex-history` | 或者 `git clone` 后按目录安装 |
+| 3 | 让 DSH 装它：说一句「帮我安装 dsh-codex-history 插件」 | 见 4.1；也可以走市场或插件管理器 |
 | 4 | 重启 DSH | 输入框下方出现「Codex 历史」即安装成功 |
 | 5 | （可选）配置 `~/.dsh/profiles/<profile>/cordis.patch.yml` | 见第 5 节；不配就用默认值 |
 | 6 | （可选）两台机器共享同一份被同步的目录 | 见第 7 节，配置 `share.enabled: true` |
@@ -377,6 +374,19 @@ dsh-codex-history/
 ---
 
 ## 11. 开发与测试
+
+### 11.1 从源码开发
+
+```bash
+git clone https://github.com/chameleonn4/dsh-codex-history.git
+cd dsh-codex-history
+```
+
+在 profile 目录下执行 `pnpm add link:D:/path/to/dsh-codex-history` 建立链接后，
+改完代码在插件管理器里重新启用一次 `codex-history`（或 `dsh plugin ... set_plugin include:codex-history enabled=true`），
+Host 侧代码会热重载；Client 侧刷新一次页面即可。
+
+### 11.2 测试
 
 ```bash
 # 语法检查
