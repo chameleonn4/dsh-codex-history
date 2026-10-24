@@ -74,18 +74,27 @@ Web 端在**输入框下方**多出一枚与其他下栏完全同款的小胶囊
 
 ### 4.1 方式一：插件管理器（推荐）
 
-1. 打开 DSH → **插件管理器** → 添加插件。
-2. 填入 GitHub 地址：
+1. 打开 DSH → **插件** 页面（侧边栏的插件管理页）→ 添加插件。
+2. 填入安装地址，三种写法任选其一：
 
    ```
-   https://github.com/chameleonn4/dsh-codex-history
+   github:chameleonn4/dsh-codex-history
+   https://github.com/chameleonn4/dsh-codex-history.git
+   chameleonn4/dsh-codex-history
    ```
 
-   （或者 `chameleonn4/dsh-codex-history`）
-3. 确认安装。插件管理器会把它作为 bundle 装进当前 profile，并自动写入 `cordis.patch.yml` 的插入行。
-4. **重启 DSH**（或按提示重启），然后在输入框下方就能看到「Codex 历史」。
+3. 确认安装。插件管理器会先用 `git ls-remote` 检查仓库可达性，再执行 `pnpm add`，
+   把插件作为 bundle 装进当前 profile，并自动写入 `cordis.patch.yml` 的插入行。
+4. 安装完成后**重启 DSH**（或按提示重启），输入框下方就会出现「Codex 历史」。
 
-> 从 GitHub 安装时，插件管理器会在抓取之后校验 `engines.dsh`；不满足时会回滚 profile 清单并报告原因。
+也可以在会话里直接让 agent 装（需要 `danger-full-access` 权限）：
+
+```
+plugin_manager action=install_bundle target=github:chameleonn4/dsh-codex-history
+```
+
+> 从 GitHub 安装时，版本兼容性（`engines.dsh`）在拉取之后校验；不满足时会回滚 profile 清单，
+> 并给出 `incompatible-version` 记录（本插件要求 DSH ≥ 0.2.0）。
 
 ### 4.2 方式二：克隆到本地再按目录安装
 
@@ -98,6 +107,9 @@ git clone https://github.com/chameleonn4/dsh-codex-history.git
 ```bash
 dsh plugin --profile <profile> install ./dsh-codex-history
 ```
+
+> 本地目录安装走的是「本地路径」通道，版本兼容性在 pnpm 运行**之前**就会被检查，
+> 不满足时什么都不会下载。
 
 ### 4.3 方式三：手动写入 profile patch
 
@@ -121,6 +133,23 @@ cd dsh-codex-history
 在 profile 目录下执行 `pnpm add link:D:/path/to/dsh-codex-history` 建立链接后，
 改完代码在插件管理器里重新启用一次 `codex-history`（或 `dsh plugin ... set_plugin include:codex-history enabled=true`），
 Host 侧代码会热重载；Client 侧刷新一次页面即可。
+
+### 4.5 工位笔记本部署清单
+
+在一台**新机器**上装好这套插件，只要按下面的顺序走一遍：
+
+| # | 步骤 | 说明 |
+| --- | --- | --- |
+| 1 | 确认 DSH 版本 ≥ 0.2.0 | 插件管理器 → 关于 / `dsh --version` |
+| 2 | 在这台机器上正常使用 Codex 一次 | 需要 `~/.codex/sessions` 下有 `rollout-*.jsonl`，否则没有历史可读 |
+| 3 | 插件页 → 添加插件 → `github:chameleonn4/dsh-codex-history` | 或者 `git clone` 后按目录安装 |
+| 4 | 重启 DSH | 输入框下方出现「Codex 历史」即安装成功 |
+| 5 | （可选）配置 `~/.dsh/profiles/<profile>/cordis.patch.yml` | 见第 5 节；不配就用默认值 |
+| 6 | （可选）两台机器共享同一份被同步的目录 | 见第 7 节，配置 `share.enabled: true` |
+| 7 | 验证 | 打开面板应能看到本机 Codex 会话；或 `GET /api/codex-history/status` 返回 `sessionCount > 0` |
+
+> 换机器时**不需要**迁移任何配置或数据：会话记录留在各自的 `~/.codex/sessions`，
+> 插件只读。想让两台机器互相看到对方的会话，用第 7 节的共享目录方案。
 
 ---
 
