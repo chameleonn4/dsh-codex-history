@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# dev scratch
+.extract/
+tmp_*.mjs
+tmp_probe*.json
+*.log
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# runtime share dir (created by the share feature)
+CodexShare/

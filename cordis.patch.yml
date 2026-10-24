@@ -1,0 +1,6 @@
+# Codex 历史 bundle patch
+#
+# 自动读取本地 Codex CLI 的会话记录（~/.codex/sessions），并把上下文交给 DSH。
+- insert:
+    - id: codex-history
+      name: 'dsh-codex-history'

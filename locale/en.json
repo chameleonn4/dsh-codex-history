@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Codex History",
+    "description": "Reads the local Codex CLI conversation history from ~/.codex/sessions, hands it to DeepSeek Harness, and syncs new Codex messages back."
+  }
+}

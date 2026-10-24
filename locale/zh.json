@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Codex 历史记录",
+    "description": "自动读取本地 Codex CLI 的聊天记录（~/.codex/sessions），把上下文无缝交给 DeepSeek Harness，并在 Codex 侧有新进展时同步回来。"
+  }
+}
