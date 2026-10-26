@@ -4,6 +4,15 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-10-26
+
+### Fixed
+- 修复 Web 面板会话列表撑破面板、盖住「目录:」一行的问题（弹性子项缺少 `minHeight: 0`）。
+
+### Added
+- 商店截图：`screenshots.json` + `assets/screenshot-*.png`（面板 / 工作要点 / 下栏入口），README 顶部也放了面板图。
+- `tools/build-release.mjs`：一条命令构建 npm 风格的发布 tarball 并挂到 GitHub Release。
+
 ## [1.3.0] - 2026-10-23
 
 ### Added
@@ -45,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 首版：自动读取 `~/.codex/sessions`、解析 Codex rollout JSONL、`codex_history` 模型工具、
   `/codex` 斜杠命令、输入框下方的「Codex 历史」Web 面板、按工作目录自动带入上下文。
 
+[1.3.1]: https://github.com/chameleonn4/dsh-codex-history/releases/tag/v1.3.1
 [1.3.0]: https://github.com/chameleonn4/dsh-codex-history/releases/tag/v1.3.0
 [1.2.0]: https://github.com/chameleonn4/dsh-codex-history/releases/tag/v1.2.0
 [1.1.0]: https://github.com/chameleonn4/dsh-codex-history/releases/tag/v1.1.0
