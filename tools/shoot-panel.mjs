@@ -42,7 +42,7 @@ const edge = spawn(EDGE, [
   '--no-default-browser-check',
   '--disable-gpu',
   '--hide-scrollbars',
-  '--window-size=1440,900',
+  `--window-size=${process.env.DSH_SHOT_WINDOW ?? '1440,900'}`,
   'about:blank',
 ], { stdio: 'ignore' })
 
@@ -159,9 +159,19 @@ await sleep(3000)
 
 const rect = await evaluate(`(() => {
   const el = document.querySelector('.codex-history-pill')?.closest('div');
-  const panel = [...document.querySelectorAll('div')].find((d) => d.className && String(d.className).includes('codex-history'));
+  const panel = document.querySelector('.codex-history-panel');
   const r = (panel ?? el)?.getBoundingClientRect();
-  return JSON.stringify({ rect: r ? { x: r.x, y: r.y, width: r.width, height: r.height } : null, body: document.body.innerText.slice(0, 200) });
+  const list = panel?.querySelector('.codex-history-list');
+  const lr = list?.getBoundingClientRect();
+  const meta = panel?.children[4];
+  const mr = meta?.getBoundingClientRect();
+  return JSON.stringify({
+    rect: r ? { x: r.x, y: r.y, width: r.width, height: r.height } : null,
+    viewport: { w: innerWidth, h: innerHeight },
+    list: lr ? { top: lr.top, height: lr.height, scrollHeight: list.scrollHeight, clientHeight: list.clientHeight } : null,
+    meta: mr ? { top: mr.top, height: mr.height, text: (meta.textContent || '').slice(0, 60) } : null,
+    body: document.body.innerText.slice(0, 200),
+  });
 })()`)
 console.log('rect:', rect)
 

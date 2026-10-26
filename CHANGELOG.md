@@ -4,6 +4,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.2] - 2026-10-26
+
+### Fixed
+- 窗口较矮时 Web 面板把「目录:」一行挤成半截、会话行被压扁的问题：面板里除会话列表外的
+  每一项都固定为不收缩（`flexShrink: 0`），列表改为 `flex: 1 1 0%` 独占剩余空间并滚动。
+- 「工作要点」弹层移入会话列表内部，随列表一起滚动，不再把面板撑出容器。
+
+### Changed
+- 面板最大高度由 `min(60vh, 520px)` 放宽到 `min(70vh, 560px)`，矮窗口下也能看到完整会话行。
+
 ## [1.3.1] - 2026-10-26
 
 ### Fixed

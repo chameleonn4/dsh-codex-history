@@ -1,6 +1,6 @@
 {
   "name": "dsh-codex-history",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "DeepSeek Harness 插件：自动读取本地 Codex 会话历史（~/.codex/sessions），让 DSH 与 Codex 无缝衔接；支持会话检索、工作要点、跨机共享目录与实时增量同步。",
   "license": "MIT",
   "author": "chameleonn4",

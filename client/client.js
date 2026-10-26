@@ -165,7 +165,7 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         zIndex: 1100,
         boxSizing: 'border-box',
         width: 'min(460px, calc(100vw - 24px))',
-        maxHeight: 'min(60vh, 520px)',
+        maxHeight: 'min(70vh, 560px)',
         display: 'flex',
         flexDirection: 'column',
         gap: '10px',
@@ -228,7 +228,9 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         display: 'flex',
         flexDirection: 'column',
         gap: '2px',
-        flex: '1 1 auto',
+        // The list is the only part of the panel that may shrink; every other
+        // child keeps its natural height so nothing gets squeezed away.
+        flex: '1 1 0%',
         minHeight: 0,
       },
       item: {
@@ -239,6 +241,7 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         borderRadius: 'var(--dsw-radius-sm, 6px)',
         background: 'transparent',
         border: 'none',
+        flexShrink: 0,
       },
       title: {
         color: 'var(--dsw-alias-label-primary, inherit)',
@@ -252,6 +255,7 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         alignItems: 'center',
         gap: '6px',
         minWidth: 0,
+        flexShrink: 0,
       },
       badge: {
         flex: '0 0 auto',
@@ -269,13 +273,15 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+        flexShrink: 0,
       },
       status: {
         color: 'var(--dsw-alias-label-tertiary, inherit)',
         fontSize: '11px',
+        flexShrink: 0,
       },
       worklog: {
-        maxHeight: '220px',
+        maxHeight: 'min(220px, 26vh)',
         overflowY: 'auto',
         display: 'flex',
         flexDirection: 'column',
@@ -284,6 +290,7 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         borderRadius: 'var(--dsw-radius-sm, 6px)',
         background: 'var(--dsw-alias-bg-layer-1, transparent)',
         border: '1px solid var(--dsw-alias-border-l1, transparent)',
+        flexShrink: 0,
       },
       worklogText: {
         margin: 0,
@@ -293,7 +300,7 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
       },
-      error: { color: 'var(--dsw-alias-state-error-primary, #d33)', fontSize: '11px' },
+      error: { color: 'var(--dsw-alias-state-error-primary, #d33)', fontSize: '11px', flexShrink: 0 },
     }
 
     /** Hover and focus affordances the inline styles cannot express. */
@@ -488,6 +495,7 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
             'div',
             {
               style: styles.panel,
+              className: 'codex-history-panel',
               role: 'dialog',
               'aria-label': t('heading'),
               onClick: (event) => event.stopPropagation(),
@@ -561,7 +569,7 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
             ),
             h(
               'div',
-              { style: styles.list },
+              { style: styles.list, className: 'codex-history-list' },
               loading && h('div', { style: styles.status }, t('loading')),
               !loading && !available && h('div', { style: styles.error }, t('unavailable')),
               !loading && available && items.length === 0 && h('div', { style: styles.status }, t('empty')),
@@ -625,34 +633,34 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
                   ),
                 ),
               ),
-            ),
-            worklog
-              ? h(
-                  'div',
-                  { style: styles.worklog },
-                  h(
+              worklog
+                ? h(
                     'div',
-                    { style: styles.row },
-                    h('span', { style: styles.meta }, t('worklog')),
+                    { style: styles.worklog },
                     h(
-                      'button',
-                      {
-                        type: 'button',
-                        className: 'codex-history-ghost',
-                        style: styles.button,
-                        onClick: () => {
-                          setWorklog('')
-                          setWorklogFor('')
+                      'div',
+                      { style: styles.row },
+                      h('span', { style: styles.meta }, t('worklog')),
+                      h(
+                        'button',
+                        {
+                          type: 'button',
+                          className: 'codex-history-ghost',
+                          style: styles.button,
+                          onClick: () => {
+                            setWorklog('')
+                            setWorklogFor('')
+                          },
                         },
-                      },
-                      t('closeWorklog'),
+                        t('closeWorklog'),
+                      ),
                     ),
-                  ),
-                  h('pre', { style: styles.worklogText }, worklog),
-                )
-              : null,
-            status ? h('div', { style: styles.status }, status) : null,
-            error ? h('div', { style: styles.error }, error) : null,
+                    h('pre', { style: styles.worklogText }, worklog),
+                  )
+                : null,
+              status ? h('div', { style: styles.status }, status) : null,
+              error ? h('div', { style: styles.error }, error) : null,
+            ),
           )
         : null
 

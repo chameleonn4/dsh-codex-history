@@ -36,7 +36,7 @@ import {
 } from './lib/format.js'
 
 const API_BASE = '/api/codex-history'
-const VERSION = '1.3.1'
+const VERSION = '1.3.2'
 
 const DEFAULTS = {
   sessionsDir: undefined,
