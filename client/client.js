@@ -184,15 +184,17 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
         alignItems: 'center',
         gap: '6px',
         minWidth: 0,
+        flexShrink: 0,
         color: 'var(--dsw-alias-label-primary, inherit)',
         fontWeight: 500,
         fontSize: '13px',
       },
       panelRule: {
+        flexShrink: 0,
         borderTop: '0.5px solid var(--dsw-alias-border-l2, transparent)',
         marginTop: '8px',
       },
-      row: { display: 'flex', gap: '6px', alignItems: 'center' },
+      row: { display: 'flex', gap: '6px', alignItems: 'center', flexShrink: 0 },
       input: {
         flex: '1',
         minWidth: 0,
@@ -220,7 +222,15 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
       primary: {
         color: 'var(--dsw-alias-brand-primary, var(--dsw-alias-label-primary, inherit))',
       },
-      list: { overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '2px' },
+      list: {
+        overflowY: 'auto',
+        overscrollBehavior: 'contain',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '2px',
+        flex: '1 1 auto',
+        minHeight: 0,
+      },
       item: {
         display: 'flex',
         flexDirection: 'column',
@@ -307,10 +317,10 @@ if (!globalThis.__dshCodexHistoryClientExecuted) {
 
     const installCss = () => {
       if (typeof document === 'undefined') return
-      const id = '@local/codex-history/client.css'
+      const id = 'dsh-codex-history/client.css'
       if (document.querySelector(`style[data-plugin-css="${id}"]`)) return
       const tag = document.createElement('style')
-      tag.dataset.plugin = '@local/codex-history'
+      tag.dataset.plugin = 'dsh-codex-history'
       tag.dataset.pluginCss = id
       tag.textContent = CSS
       document.head.appendChild(tag)

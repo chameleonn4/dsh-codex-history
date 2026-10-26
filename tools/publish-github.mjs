@@ -33,7 +33,8 @@ const dryRun = flag('dry-run')
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
 const IGNORED_DIRS = new Set(['node_modules', '.git', '.extract', 'CodexShare', '.vscode', '.idea'])
-const IGNORED_FILES = /^(tmp_.*\.mjs|tmp_probe.*\.json|.*\.log)$/u
+// `raw-*.png` are the un-cropped screenshots of the operator's own machine — never publish them.
+const IGNORED_FILES = /^(tmp_.*\.mjs|tmp_probe.*\.json|raw-.*\.png|.*\.log)$/u
 
 const collect = (dir, prefix = '') => {
   const entries = fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))

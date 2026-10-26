@@ -15,6 +15,8 @@
 > curated list behind the DSH plugin market — PR [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052).
 > The only open check is the one-day repository age, which re-runs by itself and clears on its own.
 
+![The local Codex session panel](./assets/screenshot-panel.png)
+
 ---
 
 ## 1. What it solves
@@ -41,7 +43,13 @@ The plugin has **zero runtime dependencies** (Node built-ins only) and **only re
 ## 2. UI
 
 A small pill labeled **“Codex 历史”** appears under the composer, styled exactly like the other
-bottom-bar entries (`activity`, `usage`). Clicking it opens a panel with:
+bottom-bar entries (`activity`, `usage`).
+
+![The “Codex 历史” entry under the composer](./assets/screenshot-dock.png)
+
+Clicking it opens a panel with:
+
+![The local Codex session panel](./assets/screenshot-panel.png)
 
 ```
 本地 Codex 会话                                    关闭
@@ -57,6 +65,10 @@ bottom-bar entries (`activity`, `usage`). Clicking it opens a panel with:
 - **Import** injects the transcript into the current conversation so the model can continue.
 - **Fill input** puts the transcript into the composer box.
 - **Work log** shows the structured summary.
+
+![The work log](./assets/screenshot-worklog.png)
+
+> The screenshots use demo data only — no real conversation content is shown.
 
 ---
 

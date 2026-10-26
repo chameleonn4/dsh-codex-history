@@ -15,6 +15,8 @@ English README: [README.en.md](./README.en.md)
 > [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)。仓库创建满 1 天后该检查会自动转绿并合入，
 > 之后就能在 [awesome-dsh-plugin.com](https://awesome-dsh-plugin.com) 和 dsh-market 里搜到本插件。
 
+![本地 Codex 会话面板](./assets/screenshot-panel.png)
+
 ---
 
 ## 1. 它解决什么问题
@@ -40,7 +42,12 @@ English README: [README.en.md](./README.en.md)
 ## 2. 界面
 
 Web 端在**输入框下方**多出一枚与其他下栏完全同款的小胶囊按钮「**Codex 历史**」（与 `activity`、`usage` 同字号、同色系）。
+
+![输入框下方的「Codex 历史」入口](./assets/screenshot-dock.png)
+
 点击后弹出面板：
+
+![本地 Codex 会话面板](./assets/screenshot-panel.png)
 
 ```
 本地 Codex 会话                                    关闭
@@ -57,7 +64,10 @@ Web 端在**输入框下方**多出一枚与其他下栏完全同款的小胶囊
 - **填入输入框**：把会话内容写进输入框，你自己决定怎么问。
 - **工作要点**：展开结构化摘要（做了什么、动了哪些文件、哪里失败）。
 
+![工作要点](./assets/screenshot-worklog.png)
+
 > 面板里的会话来自本机 Codex 目录；开启共享目录后，其他机器的会话也会出现在同一列表里，并标注来源机器。
+> 截图使用演示数据，不含任何真实会话内容。
 
 ---
 
