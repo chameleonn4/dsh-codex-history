@@ -3,6 +3,7 @@ node_modules/
 
 # dev scratch
 .extract/
+.release/
 tmp_*.mjs
 tmp_probe*.json
 *.log
@@ -15,3 +16,9 @@ Thumbs.db
 
 # runtime share dir (created by the share feature)
 CodexShare/
+
+# demo fixtures for the store screenshots (regenerate with tools/make-demo-sessions.mjs)
+demo-sessions/
+
+# un-cropped screenshots of the operator's machine — never publish
+assets/raw-*.png
