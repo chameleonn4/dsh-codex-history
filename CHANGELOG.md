@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - 面板最大高度由 `min(60vh, 520px)` 放宽到 `min(70vh, 560px)`，矮窗口下也能看到完整会话行。
 
+### Docs
+- 插件已收录进 DSH 插件市场（awesome-dsh-plugin，PR #9052 于 2026-10-26 合入）；
+  README 的市场标记与上架状态段落同步改为「已收录」，并附上插件页地址。
+
 ## [1.3.1] - 2026-10-26
 
 ### Fixed

@@ -7,13 +7,14 @@
 [![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.0-5843b8)](https://github.com/chameleonn4/dsh-codex-history)
 [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![node](https://img.shields.io/badge/node-%3E%3D20-3c8739)](https://nodejs.org)
-[![market](https://img.shields.io/badge/DSH%20%E5%B8%82%E5%9C%BA-%E5%B7%B2%E6%8F%90%E4%BA%A4-ff7b1f)](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)
+[![market](https://img.shields.io/badge/DSH%20%E5%B8%82%E5%9C%BA-%E5%B7%B2%E6%94%B6%E5%BD%95-2f9e44)](https://awesome-dsh-plugin.com/p/chameleonn4/dsh-codex-history/)
 
 English README: [README.en.md](./README.en.md)
 
-> 📌 **上架状态**：已向 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)（DSH 插件市场的精选列表）提交收录 PR
-> [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)。仓库创建满 1 天后该检查会自动转绿并合入，
-> 之后就能在 [awesome-dsh-plugin.com](https://awesome-dsh-plugin.com) 和 dsh-market 里搜到本插件。
+> 📌 **上架状态**：已收录进 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)（DSH 插件市场的精选列表），
+> 收录 PR [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052) 已于 2026-10-26 合入，
+> 插件页：[awesome-dsh-plugin.com/p/chameleonn4/dsh-codex-history](https://awesome-dsh-plugin.com/p/chameleonn4/dsh-codex-history/)。
+> 在 [awesome-dsh-plugin.com](https://awesome-dsh-plugin.com) 或 dsh-market 里搜 `dsh-codex-history` 就能装。
 
 ![本地 Codex 会话面板](./assets/screenshot-panel.png)
 
@@ -123,10 +124,8 @@ agent 会自己完成整套流程：
 3. 点安装，按提示重启 DSH。
 
 市场里的插件列表来自精选列表 [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)，
-本插件的收录 PR 是 [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)；
-合并后就会出现在市场里。国内网络下市场会自动切换到 npm 镜像。
-
-> 收录合并前，先用方式一或方式三装。
+本插件已于 2026-10-26 收录（PR [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)）。
+市场每天从上游同步一次目录，若搜不到，稍等一天或先用方式一/方式三安装。国内网络下市场会自动切换到 npm 镜像。
 
 ### 4.3 方式三：插件管理器
 

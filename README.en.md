@@ -7,13 +7,15 @@
 [![DSH](https://img.shields.io/badge/DSH-%3E%3D0.2.0-5843b8)](https://github.com/chameleonn4/dsh-codex-history)
 [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE)
 [![node](https://img.shields.io/badge/node-%3E%3D20-3c8739)](https://nodejs.org)
-[![market](https://img.shields.io/badge/DSH%20Market-submitted-ff7b1f)](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)
+[![market](https://img.shields.io/badge/DSH%20Market-listed-2f9e44)](https://awesome-dsh-plugin.com/p/chameleonn4/dsh-codex-history/)
 
 中文文档：[README.md](./README.md)
 
-> 📌 **Listing status**: submitted to [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin), the
-> curated list behind the DSH plugin market — PR [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052).
-> The only open check is the one-day repository age, which re-runs by itself and clears on its own.
+> 📌 **Listing status**: listed in [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin), the
+> curated list behind the DSH plugin market — PR [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)
+> was merged on 2026-10-26. Plugin page:
+> [awesome-dsh-plugin.com/p/chameleonn4/dsh-codex-history](https://awesome-dsh-plugin.com/p/chameleonn4/dsh-codex-history/).
+> Search `dsh-codex-history` on [awesome-dsh-plugin.com](https://awesome-dsh-plugin.com) or in dsh-market.
 
 ![The local Codex session panel](./assets/screenshot-panel.png)
 
@@ -123,10 +125,9 @@ point sessionsDir at C:\Users\me\.codex\sessions, and turn on the shared folder 
 3. Click install and restart DSH when prompted.
 
 The market catalogue comes from [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin);
-this plugin's listing PR is [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052).
-It shows up there once that PR merges. The market switches to the npm mirror automatically on mainland networks.
-
-> Before the listing merges, use 4.1 or 4.3.
+this plugin was listed on 2026-10-26 (PR [#9052](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/9052)).
+The market syncs that catalogue once a day, so if a search comes up empty, wait a day or use 4.1 / 4.3.
+The market switches to the npm mirror automatically on mainland networks.
 
 ### 4.3 Plugin manager
 
